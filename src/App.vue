@@ -1,12 +1,13 @@
 <template>
 <div id="app">
 	<img alt="Vue logo" src="./assets/logo.png">
-	<Newusers @usertoglobal="checkUsers"></Newusers>
+	<Newusers @usertoglobal="checkUser"></Newusers>
+	
 	<div class="personList">
 		<ul class="users-list">
-			<li v-for="users in allUsers">
+			<li v-for="(users, index) in allUsers" :key="index">
 				{{ users.name }} {{ users.surname }}
-				<Deleteusers></Deleteusers>
+				<Deleteusers @deletetoglobal="deleteUser" :user-index="index" />
 			</li>
 		</ul>
 	</div>
@@ -18,20 +19,24 @@ import Newusers from './components/Newusers.vue'
 import Deleteusers from './components/Deleteusers.vue'
 
 export default {
-  name: 'app',
+	name: 'app', 
   components: {
 	Newusers,
 	Deleteusers
   },
   data() {
     return{
-      allUsers: [],
+			allUsers: [],
+		
     }
-  },
+	},
   methods:{
-    checkUsers(value){
+    checkUser: function(value){
       this.allUsers = value;
-    }
+		},
+		deleteUser: function(ddd){
+			this.allUsers.splice(ddd, 1);
+		},
   },
 }
 </script>

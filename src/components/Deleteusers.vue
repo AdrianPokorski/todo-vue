@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button>Delete</button>
+        <button @click="deleteUser">Delete</button>
     </div>
 </template>
 
@@ -8,12 +8,14 @@
 <script>
 export default {
   name: 'Deleteusers',
-  data() {
-    return {
-
-    };
-  },
-
+  props: ['userIndex'],
+  
+  methods: {
+      deleteUser: function(){
+    
+      this.$emit("deletetoglobal", this.userIndex)
+    }
+  }
 }
 </script>
 
